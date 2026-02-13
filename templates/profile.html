@@ -1,0 +1,12 @@
+<h2>User Info</h2>
+<p>Username: {{user[1]}}</p>
+<p>Name: {{user[3]}} {{user[4]}}</p>
+<p>Email: {{user[5]}}</p>
+<p>Address: {{user[6]}}</p>
+
+<form action="/upload" method="POST" enctype="multipart/form-data">
+Upload Limerick.txt:
+<input type="file" name="file">
+<input type="submit">
+</form>
+
