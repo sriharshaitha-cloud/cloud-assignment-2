@@ -78,8 +78,14 @@ def relogin():
 
 
 # Upload file
-@app.route('/upload', methods=['POST'])
+@app.route('/upload/', methods=['POST'])
 def upload():
+    username = request.form.get('username')
+    conn = sqlite3.connect('/var/www/flaskapp/users.db')
+    c = conn.cursor()
+    c.execute("SELECT * FROM users WHERE username=?", (username,))
+    user = c.fetchone()
+    conn.close()
     if 'file' not in request.files:
         return "No file selected"
 
@@ -95,7 +101,8 @@ def upload():
         word_count = len(f.read().split())
 
     return render_template(
-        'wordcount.html',
+        'profile.html',
+        user=user,
         word_count=word_count,
         filename=file.filename
     )
